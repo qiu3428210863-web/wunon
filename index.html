@@ -2261,6 +2261,85 @@
 </head>
 <body>
 
+<!-- ─── Loading Splash Screen ─── -->
+<div id="loadingSplash">
+  <div class="splash-content">
+    <div class="splash-logo">屋弄家居</div>
+    <div class="splash-sub">UNOspazio</div>
+    <div class="splash-loader">
+      <div class="splash-bar"></div>
+    </div>
+    <div class="splash-tip">正在加载...</div>
+  </div>
+</div>
+<style>
+  #loadingSplash {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--bg, #f7f5f0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+  #loadingSplash.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .splash-content {
+    text-align: center;
+  }
+  .splash-logo {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--text-primary, #2a2a2a);
+    animation: splashPulse 1.6s ease-in-out infinite;
+  }
+  .splash-sub {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--text-muted, #9a9a9a);
+    margin-top: 6px;
+    font-weight: 300;
+  }
+  .splash-loader {
+    width: 160px;
+    height: 2px;
+    background: var(--border, #e5e0d8);
+    border-radius: 2px;
+    margin: 32px auto 0;
+    overflow: hidden;
+  }
+  .splash-bar {
+    height: 100%;
+    width: 0;
+    background: var(--accent, #8b7355);
+    border-radius: 2px;
+    animation: splashLoad 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .splash-tip {
+    font-size: 12px;
+    color: var(--text-muted, #9a9a9a);
+    letter-spacing: 1px;
+    margin-top: 14px;
+    font-weight: 300;
+  }
+  @keyframes splashPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(0.98); }
+  }
+  @keyframes splashLoad {
+    0% { width: 0; }
+    70% { width: 72%; }
+    100% { width: 88%; }
+  }
+</style>
+
 <!-- ─── Toast ─── -->
 <div class="toast" id="toast"></div>
 
@@ -3510,6 +3589,28 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
   document.querySelectorAll('.scroll-reveal').forEach(el => revealObserver.observe(el));
+</script>
+
+<script>
+  // ─── Loading Splash Dismiss ───
+  (function() {
+    var splash = document.getElementById('loadingSplash');
+    if (!splash) return;
+
+    function dismissSplash() {
+      splash.classList.add('hidden');
+      setTimeout(function() { splash.style.display = 'none'; }, 700);
+    }
+
+    // Wait for full page load (images, fonts, etc.)
+    if (document.readyState === 'complete') {
+      dismissSplash();
+    } else {
+      window.addEventListener('load', dismissSplash);
+      // Fallback: if still loading after 8 seconds, dismiss anyway
+      setTimeout(dismissSplash, 8000);
+    }
+  })();
 </script>
 
 </body>
