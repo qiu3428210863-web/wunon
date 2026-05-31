@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>页面加载中 — 屋弄家居 UNOspazio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --text-primary: #2a2a2a;
+    --text-secondary: #6b6b6b;
+    --accent: #8b7355;
+    --border: #e5e0d8;
+    --font-sans: 'Inter', 'Noto Sans SC', sans-serif;
+  }
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    text-align: center;
+    padding: 20px;
+  }
+  .logo {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 40px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+  h1 {
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    max-width: 500px;
+    line-height: 1.8;
+  }
+  .back-link {
+    font-size: 14px;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 4px;
+    transition: opacity 0.3s;
+  }
+  .back-link:hover { opacity: 0.7; }
+</style>
+</head>
+<body>
+  <a href="wunong.html" class="logo">屋弄家居 UNOspazio</a>
+  <h1 id="pageTitle">页面内容正在规划中</h1>
+  <p id="pageDesc">我们正在为“<span id="pageName"></span>”板块准备更精彩的内容。这里将展示屋弄家居对生活美学的深度理解，敬请期待。</p>
+  <a href="wunong.html" class="back-link">返回首页 →</a>
+
+  <script>
+    const pathMap = {
+      'soft-furnishings.html': '软装装置',
+      'custom-furniture.html': '定制家具',
+      'lifestyle-decor.html': '生活摆件',
+      'new-arrivals.html': '新品上市',
+      'shipping.html': '配送说明',
+      'returns.html': '退换货政策',
+      'maintenance.html': '家具保养',
+      'size-guide.html': '尺寸指南',
+      'contact.html': '联系我们',
+      'brand-story.html': '品牌故事',
+      'design-team.html': '设计团队',
+      'store-list.html': '门店列表',
+      'join-us.html': '加入我们'
+    };
+    const fileName = window.location.pathname.split('/').pop();
+    const pageName = pathMap[fileName] || '内页面';
+    document.title = pageName + ' — 屋弄家居 UNOspazio';
+    document.getElementById('pageName').textContent = pageName;
+    document.getElementById('pageTitle').textContent = pageName;
+  </script>
+</body>
+</html>
